@@ -1,0 +1,8 @@
+---
+- hosts: WIN
+  tasks:
+    - name: Change user password
+      win_user:
+        name: administrador
+        update_password: always
+        password: LGESP2015*

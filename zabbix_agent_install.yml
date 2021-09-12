@@ -1,0 +1,53 @@
+---
+  - name: "Zabbix Copy agent Files"
+    hosts: cluster
+    serial: 2
+    tasks:
+     
+      - name: Copy zabbix agent installation files
+        ansible.builtin.copy:
+          src: /etc/ansible/Playbook/zabbix/zabbix-get-3.4.9-1.el7.x86_64.rpm
+          dest: /tmp/zabbix-get-3.4.9-1.el7.x86_64.rpm
+          mode: '0744'
+
+      - name: Copy zabbix agent installation files
+        ansible.builtin.copy:
+          src: /etc/ansible/Playbook/zabbix/zabbix-sender-3.4.9-1.el7.x86_64.rpm
+          dest: /tmp/zabbix-sender-3.4.9-1.el7.x86_64.rpm
+          mode: '0744'
+
+
+      - name: Copy zabbix agent installation files
+        ansible.builtin.copy:
+          src: /etc/ansible/Playbook/zabbix/zabbix-agent-3.4.9-1.el7.x86_64.rpm
+          dest: /tmp/zabbix-agent-3.4.9-1.el7.x86_64.rpm
+          mode: '0744'
+
+      - name: Install Zabbix Agent
+        yum:
+          name: /tmp/zabbix-agent-3.4.9-1.el7.x86_64.rpm
+          state: present
+
+      - name: Install Zabbix Sender
+        yum:
+          name: /tmp/zabbix-sender-3.4.9-1.el7.x86_64.rpm
+          state: present
+
+      - name: Install Zabbix Get
+        yum:
+          name: /tmp/zabbix-get-3.4.9-1.el7.x86_64.rpm
+          state: present
+
+
+      - name: Copy zabbix agent configuration file 
+        ansible.builtin.copy:
+          src: /etc/ansible/Playbook/zabbix/zabbix_agentd.conf
+          dest: /etc/zabbix/zabbix_agentd.conf
+          mode: '0744'
+
+      - name: Make sure zabbix agent is running
+        ansible.builtin.systemd:
+          state: started
+          enabled: yes
+          name: zabbix-agent
+

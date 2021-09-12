@@ -1,0 +1,11 @@
+---
+- hosts: cluster
+  remote_user: root
+  tasks: 
+    - name: "Disable maintenance mode"
+      shell: pcs property unset maintenance-mode
+      shell: pcs cluster status
+      shell: pcs resource show 
+
+
+

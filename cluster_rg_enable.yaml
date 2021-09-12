@@ -1,0 +1,14 @@
+---
+- hosts: cluster
+  remote_user: root
+  tasks: 
+    - name: "Disabling the cluster reforces and set maintenance"
+      shell: pcs resource enable PROXY_RG
+      shell: pcs resource enable WEB_RG
+      shell: pcs resource enable ORA_RG
+      shell: pcs property set maintenance-mode=false
+      shell: pcs cluster status
+      shell: pcs resource status
+
+
+

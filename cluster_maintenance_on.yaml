@@ -1,0 +1,9 @@
+---
+- hosts: cluster
+  remote_user: root
+  tasks: 
+    - name: "Enable maintenance mode"
+      shell: pcs property set maintenance-mode=true; pcs cluster status; pcs resource show
+
+
+

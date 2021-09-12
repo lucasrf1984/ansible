@@ -1,0 +1,11 @@
+---
+- name: Restrict write and execute access to User Fed-Phil
+  hosts: WIN
+  tasks:
+    - name: "Deny Acl"
+      win_acl:
+        user: root
+        path: C:\Teste_ACL 
+        type: deny
+        state: absent
+        rights: ExecuteFile,Write

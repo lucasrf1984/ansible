@@ -1,0 +1,27 @@
+---
+  - name: Remove host on zabbix server
+    hosts: dbclus1 
+    vars_prompt:
+
+    - name: hostname
+      prompt: Please specify hostname to be deleted
+      private: no
+
+    - name: login_user
+      prompt: Enter zabbix server login
+      private: no
+
+    - name: password
+      prompt: Enter zabbix server password
+
+    tasks:
+
+      - name: Create a new host or update an existing host's info
+        local_action:
+          module: community.zabbix.zabbix_host
+          server_url: http://dbclus2/zabbix
+          login_user: "{{ login_user }}"
+          login_password: "{{ password }}"
+          host_name: "{{ hostname }}"
+          status: enabled
+          state: absent 

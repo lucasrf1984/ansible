@@ -1,0 +1,8 @@
+---
+- hosts: cluster
+  remote_user: root
+  serial: 2
+  order: reverse_sorted
+  tasks: 
+    - name: "Shutdown nodes "
+      shell: pcs cluster stop --force; sleep 20; init 0

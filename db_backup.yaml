@@ -1,0 +1,11 @@
+---
+- hosts: dbclus_db_vip 
+  become: yes
+  become_user: oracle
+  become_method: su 
+  tasks: 
+    - name: "Database full backup"
+      shell: /u01/oracle/script/backup.sh
+
+
+

@@ -1,0 +1,50 @@
+---
+  - name: Create host on zabbix server
+    hosts: dbclus1 
+    vars_prompt:
+
+    - name: hostname
+      prompt: Please define a hostname
+      private: no
+
+    - name: description
+      prompt: Please provide a host description
+      private: no
+    
+    - name: login_user
+      prompt: Enter zabbix server login
+      private: no
+
+    - name: password
+      prompt: Enter zabbix server password
+
+    - name: ip
+      prompt: Please provide host to be added ip address
+      private: no
+
+
+    tasks:
+
+      - name: Create a new host or update an existing host's info
+        local_action:
+          module: community.zabbix.zabbix_host
+          server_url: http://dbclus2/zabbix
+          login_user: "{{ login_user }}"
+          login_password: "{{ password }}"
+          host_name: "{{ hostname }}"
+          visible_name: "{{ hostname }}"
+          description: "{{ description }}"
+          host_groups:
+            - Linux servers
+            - Linux servers
+          link_templates:
+            - Template OS Linux by Zabbix agent
+          status: enabled
+          state: present
+          interfaces:
+            - type: 1
+              main: 1
+              useip: 1
+              ip:  "{{ ip }}"
+              dns: ""
+              port: "10050"

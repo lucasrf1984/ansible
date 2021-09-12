@@ -1,0 +1,16 @@
+---
+  - name: "Cluster Shutdown"
+    hosts: cluster 
+    serial: 2
+    order: reverse_sorted
+    tasks:
+ 
+      - name: "Shutdown nodes"
+        shell: pcs cluster stop --force
+
+      - name: "Sleep"
+        shell: sleep 10
+
+      - name: "Shudown"
+        shell: init 0
+
