@@ -1,0 +1,7 @@
+---
+- name: "Shutdown host"
+  hosts: WIN
+ 
+  tasks: 
+    - name: "Shutdown the Windows host"
+      win_command: powershell.exe Stop-Computer -Force
