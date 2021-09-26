@@ -54,7 +54,7 @@ dbclus_db_vip
 
 [WIN:vars]
 ansible_user=ansible
-ansible_password=[input_password]
+ansible_password=[insira_senha]
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
 
